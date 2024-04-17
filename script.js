@@ -1,12 +1,10 @@
 const myLibrary = [];
 
-const main = document.getElementsByClassName("main");
 const grid = document.getElementById("grid");
 const dialog = document.querySelector("dialog");
 const addButton = document.querySelector("button");
 const closeButton = document.getElementById("close");
 const container = document.getElementById("container");
-const form = document.querySelector("form");
 const submitButton = document.querySelector("button[type=submit]");
 
 const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295 pages', 'not read yet');
@@ -31,6 +29,7 @@ function addBookToLibrary() {
 
 function displayBook() {
     myLibrary.forEach(Book => {
+        myLibrary.shift();
         const card = document.createElement("div");
         card.classList.add("card");
         grid.appendChild(card);
@@ -68,5 +67,3 @@ submitButton.addEventListener("click", function(e) {
     displayBook();
     dialog.classList.add("hidden");
 });
-
-console.log(myLibrary);
