@@ -1,4 +1,5 @@
 const myLibrary = [];
+
 const main = document.getElementsByClassName("main");
 const grid = document.getElementById("grid");
 const dialog = document.querySelector("dialog");
@@ -6,6 +7,7 @@ const addButton = document.querySelector("button");
 const closeButton = document.getElementById("close");
 const container = document.getElementById("container");
 const form = document.querySelector("form");
+const submitButton = document.querySelector("button[type=submit]");
 
 const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295 pages', 'not read yet');
 const theHobbit2 = new Book('The Lord of the Rings', 'J.R.R. Tolkien', '295 pages', 'not read yet');
@@ -19,12 +21,15 @@ function Book(title, author, pages, hasBeenRead) {
 }
 
 function addBookToLibrary() {
-    myLibrary.push(theHobbit);
-    myLibrary.push(theHobbit2);
-    myLibrary.push(theHobbit3);
+    let title = document.getElementById("title").value;
+    let author = document.getElementById("author").value;
+    let pages = document.getElementById("pages").value;
+    let hasBeenRead = document.getElementById("read").checked;
+    const newBook = new Book (title, author, pages, hasBeenRead);
+    myLibrary.push(newBook);
 }
 
-function displayLibrary() {
+function displayBook() {
     myLibrary.forEach(Book => {
         const card = document.createElement("div");
         card.classList.add("card");
@@ -33,15 +38,15 @@ function displayLibrary() {
         const title = document.createElement("h3");
         title.textContent = Book.title;
         card.appendChild(title);
-
+    
         const author = document.createElement("p");
         author.textContent = Book.author;
         card.appendChild(author);
-
+    
         const pages = document.createElement("p");
         pages.textContent = Book.pages;
         card.appendChild(pages);
-        
+            
         const hasBeenRead = document.createElement("p");
         hasBeenRead.textContent = Book.hasBeenRead;
         card.appendChild(hasBeenRead);
@@ -58,7 +63,10 @@ closeButton.addEventListener("click", () => {
     dialog.classList.add("hidden");
 });
 
-addBookToLibrary();
-displayLibrary();
+submitButton.addEventListener("click", function(e) {
+    addBookToLibrary();
+    displayBook();
+    dialog.classList.add("hidden");
+});
 
 console.log(myLibrary);

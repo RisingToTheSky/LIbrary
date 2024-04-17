@@ -79,6 +79,7 @@ form {
     flex-direction: column;
     gap: 15px;
 }
+
 .main::backdrop {
     opacity: 0.75;
 }
@@ -98,6 +99,10 @@ button[type="submit"], #close {
     height: 45px;
     background-color: #0059ff;
     border: none;
+}
+
+input {
+    padding: 5px;
 }
 
 .form-buttons {
