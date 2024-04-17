@@ -6,6 +6,7 @@
 :root {
     --gray: #f7f7f8
 }
+
 @font-face {
     font-family: "Roboto", sans-serif;
     src: url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
@@ -14,9 +15,13 @@
 
 body {
     font-family: "Roboto", sans-serif;
+}
+
+#container {
     display: grid;
     height: 100vh;
     grid-template-rows: 1fr 8fr 1fr;
+    backdrop-filter: blur(4px);
 }
 
 .header, .footer {
@@ -46,16 +51,78 @@ body {
     border: 1px solid gray;
 }
 
-button {
+.hidden {
+    display: none;
+}
+
+dialog {
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 250px;
+    background-color: lightgray;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+dialog::backdrop {
+    filter: blur(8px);
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+}
+.main::backdrop {
+    opacity: 0.75;
+}
+.checkbox {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+button[type="submit"], #close {
+    align-self: flex-end;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px;
+    width: 90px;
+    height: 45px;
+    background-color: #0059ff;
+    border: none;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 25px;
+}
+
+#close {
+    background-color: red;
+}
+
+#close:hover {
+    background-color: #ff1e00dc;
+}
+
+.add {
     grid-column: 1 / 2;
     justify-self: end;
     align-self: end;
     border-radius: 100%;
     width: 50px;
     height: 50px;
+    font-size: 25px;
     border: none;
     color: white;
-    font-weight: bold;
     background-color: #0059ff;
 }
 
