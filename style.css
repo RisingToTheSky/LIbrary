@@ -28,19 +28,20 @@ body {
 
 .main {
     display: grid;
-    grid-template-rows: auto;
+    grid-template-rows: auto 1fr;
     background-color: var(--gray);
 }
 
 #grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
     padding: 25px;
 }
 
 .card {
     background-color: white;
+    padding: 25px;
     border: 1px solid gray;
 }
 
