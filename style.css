@@ -14,8 +14,8 @@
 
 body {
     font-family: "Roboto", sans-serif;
-    height: 100vh;
     display: grid;
+    height: 100vh;
     grid-template-rows: 1fr 8fr 1fr;
 }
 
@@ -27,7 +27,21 @@ body {
 }
 
 .main {
+    display: grid;
+    grid-template-rows: auto;
     background-color: var(--gray);
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 25px;
+    padding: 25px;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid gray;
 }
 
 a {
