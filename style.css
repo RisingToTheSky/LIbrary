@@ -17,6 +17,12 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
+button {
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
 #container {
     display: grid;
     height: 100vh;
@@ -56,15 +62,23 @@ body {
     width: 20px;
     height: 20px;
     background-color: red;
-    color: white;
-    border: none;
     justify-self: end;
     border-radius: 100%;
+    font-weight: bold;
 }
 
 .delete-button:hover {
     cursor: pointer;
     background-color: #ff3300;
+}
+
+.status {
+    border-radius: 10px;
+    height: 20px;
+}
+
+.status:hover {
+    cursor: pointer;
 }
 .hidden {
     display: none;
@@ -107,14 +121,11 @@ form {
 
 button[type="submit"], #close {
     align-self: flex-end;
-    color: white;
-    font-weight: bold;
     border-radius: 10px;
     padding: 10px;
     width: 90px;
     height: 45px;
     background-color: #0059ff;
-    border: none;
     cursor: pointer;
 }
 

@@ -37,8 +37,8 @@ function displayBook() {
 
         deleteBook.addEventListener("click", () => {
             card.remove();
-            console.log(myLibrary);
         });
+        
         const title = document.createElement("h3");
         title.textContent = Book.title;
         card.appendChild(title);
@@ -50,16 +50,30 @@ function displayBook() {
         const pages = document.createElement("p");
         pages.textContent = Book.pages;
         card.appendChild(pages);
-            
-        const hasBeenRead = document.createElement("p");
+
+        const status = document.createElement("button");
+        status.classList.add("status");
         if (Book.hasBeenRead === true) {
-            hasBeenRead.textContent = "Status: Finished";
-            card.appendChild(hasBeenRead);
+            status.textContent = "Read";
+            card.appendChild(status);
+            status.style.backgroundColor = "green";
         }else {
-            hasBeenRead.textContent = "Status: Unfinished";
-            card.appendChild(hasBeenRead);
+            status.textContent = "Not Read";
+            status.style.backgroundColor = "red";
+            card.appendChild(status);
         }
 
+        status.addEventListener("click", () => {
+            if (status.textContent === "Read") {
+                status.textContent = "Not Read";
+                Book.hasBeenRead = false;
+                status.style.backgroundColor = "red";
+            }else {
+                status.textContent = "Read";
+                Book.hasBeenRead = true;
+                status.style.backgroundColor = "green";
+            }
+        })
     });
 }
 
