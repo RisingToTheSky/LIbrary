@@ -41,16 +41,31 @@ body {
 
 #grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 0.25fr));
     gap: 25px;
 }
 
 .card {
+    display: grid;
     background-color: white;
     padding: 25px;
     border: 1px solid gray;
 }
 
+.delete-button {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    justify-self: end;
+    border-radius: 100%;
+}
+
+.delete-button:hover {
+    cursor: pointer;
+    background-color: #ff3300;
+}
 .hidden {
     display: none;
 }
@@ -83,6 +98,7 @@ form {
 .main::backdrop {
     opacity: 0.75;
 }
+
 .checkbox {
     display: flex;
     flex-direction: row;
@@ -99,6 +115,7 @@ button[type="submit"], #close {
     height: 45px;
     background-color: #0059ff;
     border: none;
+    cursor: pointer;
 }
 
 input {
@@ -131,7 +148,7 @@ input {
     background-color: #0059ff;
 }
 
-button:hover {
+.add:hover {
     cursor: pointer;
     background-color: #0099ff;
 }

@@ -7,10 +7,6 @@ const closeButton = document.getElementById("close");
 const container = document.getElementById("container");
 const submitButton = document.querySelector("button[type=submit]");
 
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', '295 pages', 'not read yet');
-const theHobbit2 = new Book('The Lord of the Rings', 'J.R.R. Tolkien', '295 pages', 'not read yet');
-const theHobbit3 = new Book('The Silmarillion', 'J.R.R. Tolkien', '295 pages', 'not read yet');
-
 function Book(title, author, pages, hasBeenRead) {
     this.title = title;
     this.author = author;
@@ -34,6 +30,15 @@ function displayBook() {
         card.classList.add("card");
         grid.appendChild(card);
 
+        const deleteBook = document.createElement("button");
+        deleteBook.textContent = "X";
+        deleteBook.classList.add("delete-button");
+        card.appendChild(deleteBook);
+
+        deleteBook.addEventListener("click", () => {
+            card.remove();
+            console.log(myLibrary);
+        });
         const title = document.createElement("h3");
         title.textContent = Book.title;
         card.appendChild(title);
@@ -47,8 +52,14 @@ function displayBook() {
         card.appendChild(pages);
             
         const hasBeenRead = document.createElement("p");
-        hasBeenRead.textContent = Book.hasBeenRead;
-        card.appendChild(hasBeenRead);
+        if (Book.hasBeenRead === true) {
+            hasBeenRead.textContent = "Status: Finished";
+            card.appendChild(hasBeenRead);
+        }else {
+            hasBeenRead.textContent = "Status: Unfinished";
+            card.appendChild(hasBeenRead);
+        }
+
     });
 }
 
