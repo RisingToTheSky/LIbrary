@@ -42,7 +42,7 @@ function displayBook() {
         card.appendChild(deleteBook);
 
         deleteBook.addEventListener("click", () => {
-            myLibrary = myLibrary.filter(lastBook => lastBook.uniqueId !== uniqueId);
+            removeBookFromLibrary(uniqueId);
             card.remove();
         });
         
