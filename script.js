@@ -6,6 +6,7 @@ const addButton = document.querySelector("button");
 const closeButton = document.getElementById("close");
 const container = document.getElementById("container");
 const submitButton = document.querySelector("button[type=submit]");
+const form = document.querySelector("form");
 
 function Book(title, author, pages, hasBeenRead) {
     this.title = title;
@@ -21,12 +22,11 @@ function addBookToLibrary() {
     let hasBeenRead = document.getElementById("read").checked;
     const newBook = new Book (title, author, pages, hasBeenRead);
     myLibrary.push(newBook);
-    displayBook();
 }
 
 function displayBook() {
-    myLibrary.forEach(Book => {
-        myLibrary.shift();
+    const lastBook = myLibrary[myLibrary.length - 1];
+    if (lastBook) {
         const card = document.createElement("div");
         card.classList.add("card");
         grid.appendChild(card);
@@ -38,42 +38,44 @@ function displayBook() {
 
         deleteBook.addEventListener("click", () => {
             card.remove();
+            myLibrary.pop();
         });
         
         const title = document.createElement("h3");
-        title.textContent = Book.title;
+        title.textContent = lastBook.title;
         card.appendChild(title);
     
         const author = document.createElement("p");
-        author.textContent = Book.author;
+        author.textContent = lastBook.author;
         card.appendChild(author);
     
         const pages = document.createElement("p");
-        pages.textContent = Book.pages;
+        pages.textContent = lastBook.pages;
         card.appendChild(pages);
 
         const status = document.createElement("button");
         status.classList.add("status");
         card.appendChild(status);
-        Book.toggleReadStatus();
-        status.textContent = Book.hasBeenRead ? "Unread" : "Read";
+
+        lastBook.toggleReadStatus();
+        status.textContent = lastBook.hasBeenRead ? "Unread" : "Read";
         if (status.textContent === "Read") {
             status.style.backgroundColor = "green";
         }else {
             status.style.backgroundColor = "red";
         }
+
         status.addEventListener("click", () => {
-            Book.toggleReadStatus();
-            status.textContent = Book.hasBeenRead ? "Unread" : "Read";
+            lastBook.toggleReadStatus();
+            status.textContent = lastBook.hasBeenRead ? "Unread" : "Read";
             if (status.textContent === "Read") {
                 status.style.backgroundColor = "green";
-                console.log(Book)
+
             }else {
                 status.style.backgroundColor = "red";
-                console.log(Book);
             }
         });
-    });
+    }
 }
 
 Book.prototype.toggleReadStatus = function (){
@@ -88,9 +90,12 @@ addButton.addEventListener("click", () => {
 
 closeButton.addEventListener("click", () => {
     dialog.classList.add("hidden");
+    form.reset();
 });
 
 submitButton.addEventListener("click", function(event) {
     addBookToLibrary();
+    displayBook();
     dialog.classList.add("hidden");
+    form.reset();
 });
