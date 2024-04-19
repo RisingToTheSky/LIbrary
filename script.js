@@ -21,6 +21,7 @@ function addBookToLibrary() {
     let hasBeenRead = document.getElementById("read").checked;
     const newBook = new Book (title, author, pages, hasBeenRead);
     myLibrary.push(newBook);
+    displayBook();
 }
 
 function displayBook() {
@@ -53,28 +54,30 @@ function displayBook() {
 
         const status = document.createElement("button");
         status.classList.add("status");
-        if (Book.hasBeenRead === true) {
-            status.textContent = "Read";
-            card.appendChild(status);
+        card.appendChild(status);
+        Book.toggleReadStatus();
+        status.textContent = Book.hasBeenRead ? "Unread" : "Read";
+        if (status.textContent === "Read") {
             status.style.backgroundColor = "green";
         }else {
-            status.textContent = "Not Read";
             status.style.backgroundColor = "red";
-            card.appendChild(status);
         }
-
         status.addEventListener("click", () => {
+            Book.toggleReadStatus();
+            status.textContent = Book.hasBeenRead ? "Unread" : "Read";
             if (status.textContent === "Read") {
-                status.textContent = "Not Read";
-                Book.hasBeenRead = false;
-                status.style.backgroundColor = "red";
-            }else {
-                status.textContent = "Read";
-                Book.hasBeenRead = true;
                 status.style.backgroundColor = "green";
+                console.log(Book)
+            }else {
+                status.style.backgroundColor = "red";
+                console.log(Book);
             }
-        })
+        });
     });
+}
+
+Book.prototype.toggleReadStatus = function (){
+    this.hasBeenRead = !this.hasBeenRead;
 }
 
 addButton.addEventListener("click", () => {
@@ -87,8 +90,7 @@ closeButton.addEventListener("click", () => {
     dialog.classList.add("hidden");
 });
 
-submitButton.addEventListener("click", function(e) {
+submitButton.addEventListener("click", function(event) {
     addBookToLibrary();
-    displayBook();
     dialog.classList.add("hidden");
 });
