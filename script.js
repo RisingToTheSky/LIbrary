@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 
 const grid = document.getElementById("grid");
 const dialog = document.querySelector("dialog");
@@ -8,11 +8,12 @@ const container = document.getElementById("container");
 const submitButton = document.querySelector("button[type=submit]");
 const form = document.querySelector("form");
 
-function Book(title, author, pages, hasBeenRead) {
+function Book(title, author, pages, hasBeenRead, uniqueId) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.hasBeenRead = hasBeenRead;
+    this.uniqueId = Date.now();
 }
 
 function addBookToLibrary() {
@@ -22,6 +23,10 @@ function addBookToLibrary() {
     let hasBeenRead = document.getElementById("read").checked;
     const newBook = new Book (title, author, pages, hasBeenRead);
     myLibrary.push(newBook);
+}
+
+function removeBookFromLibrary(uniqueId) {
+    myLibrary = myLibrary.filter(Book => Book.uniqueId !== uniqueId);
 }
 
 function displayBook() {
@@ -37,8 +42,8 @@ function displayBook() {
         card.appendChild(deleteBook);
 
         deleteBook.addEventListener("click", () => {
+            myLibrary = myLibrary.filter(lastBook => lastBook.uniqueId !== uniqueId);
             card.remove();
-            myLibrary.pop();
         });
         
         const title = document.createElement("h3");
