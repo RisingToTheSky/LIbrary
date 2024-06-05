@@ -8,12 +8,14 @@ const container = document.getElementById("container");
 const submitButton = document.querySelector("button[type=submit]");
 const form = document.querySelector("form");
 
-function Book(title, author, pages, hasBeenRead, uniqueId) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.hasBeenRead = hasBeenRead;
-    this.uniqueId = Date.now();
+class Book{
+    constructor(title, author, pages, hasBeenRead) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.hasBeenRead = hasBeenRead;
+        this.uniqueId = Date.now();
+    }
 }
 
 function addBookToLibrary() {
