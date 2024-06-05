@@ -1,5 +1,3 @@
-let myLibrary = [];
-
 const grid = document.getElementById("grid");
 const dialog = document.querySelector("dialog");
 const addButton = document.querySelector("button");
@@ -18,21 +16,29 @@ class Book{
     }
 }
 
-function addBookToLibrary() {
-    let title = document.getElementById("title").value;
-    let author = document.getElementById("author").value;
-    let pages = document.getElementById("pages").value;
-    let hasBeenRead = document.getElementById("read").checked;
-    const newBook = new Book (title, author, pages, hasBeenRead);
-    myLibrary.push(newBook);
+class Library {
+    constructor() {
+        this.books = [];
+    }
+
+    addBookToLibrary() {
+        let title = document.getElementById("title").value;
+        let author = document.getElementById("author").value;
+        let pages = document.getElementById("pages").value;
+        let hasBeenRead = document.getElementById("read").checked;
+        let book = new Book(title, author, pages, hasBeenRead);
+        this.books.push(book);
+    }
+
+    removeBookFromLibrary(uniqueId) {
+        this.books = this.books.filter(Book => Book.uniqueId !== uniqueId);
+    }
 }
 
-function removeBookFromLibrary(uniqueId) {
-    myLibrary = myLibrary.filter(Book => Book.uniqueId !== uniqueId);
-}
+const library = new Library;
 
 function displayBook() {
-    const lastBook = myLibrary[myLibrary.length - 1];
+    const lastBook = library.books[library.books.length - 1];
     if (lastBook) {
         const card = document.createElement("div");
         card.classList.add("card");
@@ -44,7 +50,7 @@ function displayBook() {
         card.appendChild(deleteBook);
 
         deleteBook.addEventListener("click", () => {
-            removeBookFromLibrary(lastBook.uniqueId);
+            library.removeBookFromLibrary(lastBook.uniqueId);
             card.remove();
         });
         
@@ -101,7 +107,7 @@ closeButton.addEventListener("click", () => {
 });
 
 submitButton.addEventListener("click", function(event) {
-    addBookToLibrary();
+    library.addBookToLibrary();
     displayBook();
     dialog.classList.add("hidden");
     form.reset();
